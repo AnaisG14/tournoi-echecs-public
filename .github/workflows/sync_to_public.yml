@@ -1,0 +1,27 @@
+name: Sync to Public Repo
+
+on:
+  push:
+    branches:
+      - main  # déclenchement du workflow à chaque push sur la branche main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout private repo
+        uses: actions/checkout@v3
+
+      - name: Squash commits for public repo
+        run: |
+          git checkout main
+          git reset --soft $(git rev-list --max-parents=0 HEAD)
+          git commit -m "Clean version for public release"
+
+      - name: Push to public repo
+        env:
+          PUBLIC_REPO_TOKEN: ${{ secrets.PUBLIC_REPO_TOKEN }}
+        run: |
+          git remote add public https://github.com/AnaisG14:${{ secrets.PUBLIC_REPO_TOKEN }}/tournoi-echecs-public.git
+          git push -f public main:main  
+
