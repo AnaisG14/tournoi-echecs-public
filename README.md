@@ -53,10 +53,3 @@ Les spécificités du projet étaient les suivantes :
     $ flake8 --format=html --htmldir=flake-report
 ### 3- Ouvrir le dossier flake8-report qui vient de se créer et lancer le "index.html"
 
-
-## B- To display linting with flake8
-### 1- Do step A at least up to the 3rd point included
-### 2- Launch flake8
-    $ flake8 --format=html --htmldir=flake-report
-### 3- Open flake8-report and launch "index.html"
-
